@@ -13,9 +13,10 @@ public class RandomArticleGenerator implements ArticleGenerator {
     public Article generate(List<Word> words) {
         var wordsCopy = new ArrayList<>(words);
         Collections.shuffle(wordsCopy);
-        var content = wordsCopy.stream()
+        StringBuilder join = new StringBuilder();
+        wordsCopy.stream()
                 .map(Word::getValue)
-                .collect(Collectors.joining(" "));
-        return new Article(content);
+                .forEach(word -> join.append(word).append(" "));
+        return new Article(join.toString());
     }
 }
